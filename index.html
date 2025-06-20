@@ -30,9 +30,22 @@
             min-height: 100vh;
             padding: 20px;
             color: #333;
+            /* Changed to flex for overall page layout */
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Align items to the top */
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            gap: 20px; /* Space between main elements */
+        }
+
+        /* New container for main application content to work with overall layout */
+        .main-content-wrapper {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            width: 100%; /* Take full width of body */
+            max-width: 1600px; /* Adjust as needed for total layout width */
+            justify-content: center; /* Center content when there's space */
+            gap: 20px; /* Space between app and ads/instructions */
         }
 
         .container {
@@ -42,9 +55,10 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
             padding: 40px;
             width: 100%;
-            max-width: 1200px;
-            margin: 20px auto;
+            max-width: 900px; /* Adjusted for better integration with ads/instructions */
+            margin: 0; /* Remove auto margin as parent handles centering */
             transition: all 0.3s ease;
+            order: 2; /* Main content in the middle */
         }
 
         header {
@@ -839,226 +853,390 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            /* Adjust instructions and ads for small screens */
+            #instructions, .ad-space {
+                width: 100%;
+                max-width: none;
+                margin: 0 0 20px 0; /* Add bottom margin for separation */
+            }
+
+            .main-content-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #instructions {
+                order: 1; /* Instructions first on small screens */
+            }
+
+            .ad-space.left-ad, .ad-space.right-ad {
+                order: 3; /* Ads below the main content */
+            }
         }
     </style>
+    <style>
+    /* New styles for positioning instructions and ads */
+    #instructions {
+        background-color: #f0f8ff;  /* light blue background */
+        padding: 20px;
+        border-radius: 8px;
+        font-family: Arial, sans-serif;
+        color: #333;               /* dark text */
+        max-width: 300px; /* Reduced width to fit top-left */
+        margin: 0; /* Remove auto margin */
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        order: 1; /* Place it first in the flex container */
+        align-self: flex-start; /* Align to the start (top-left) */
+    }
+
+    #instructions h2 {
+        color: #0056b3;           /* darker blue for the header */
+        margin-bottom: 15px;
+    }
+
+    #instructions p {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    /* Styles for the ad spaces */
+    .ad-space {
+        background-color: #e6ffe6; /* Light green background for ads */
+        border: 2px dashed #28a745; /* Green dashed border */
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        color: #333;
+        max-width: 300px; /* Width for ads */
+        min-height: 250px; /* Minimum height for ads */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .left-ad {
+        order: 1; /* Left ad also on the left */
+        align-self: flex-start;
+    }
+
+    .right-ad {
+        order: 3; /* Right ad on the right */
+        align-self: flex-start;
+    }
+
+    /* Media query to ensure instructions and ads stack on smaller screens */
+    @media (max-width: 1200px) { /* Adjust breakpoint as needed */
+        .main-content-wrapper {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #instructions {
+            order: 1;
+            width: 100%;
+            max-width: 600px; /* Allow wider on smaller screens if it's the only left element */
+        }
+
+        .ad-space.left-ad {
+            order: 3;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .ad-space.right-ad {
+            order: 4;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .container {
+            order: 2; /* Main content in the middle */
+        }
+    }
+
+    @media (min-width: 1201px) {
+        body {
+            align-items: flex-start; /* Ensure elements start from the top */
+        }
+        .main-content-wrapper {
+            display: flex;
+            flex-direction: row; /* Horizontal layout for larger screens */
+            justify-content: center; /* Center main elements */
+            align-items: flex-start; /* Align all items to the top */
+        }
+        #instructions {
+            margin-right: 20px; /* Space between instructions and main content */
+            order: 1;
+        }
+        .ad-space.left-ad {
+            margin-right: 20px;
+            order: 1; /* Can be next to instructions or above if you want specific stacking */
+        }
+        .ad-space.right-ad {
+            margin-left: 20px; /* Space between main content and right ad */
+            order: 3;
+        }
+        .container {
+            order: 2; /* Main content remains in the middle */
+            flex-shrink: 0; /* Prevent it from shrinking */
+        }
+    }
+    </style>
+
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <i class="fas fa-wave-square"></i>
-            </div>
-            <h1>Audio Converter Pro</h1>
-            <p class="subtitle">Professional audio conversion and processing with enterprise-grade features</p>
-            
-            <div class="status-bar">
-                <div class="status-item">
-                    <i class="fas fa-database"></i>
-                    <span>Batch Limit:</span>
-                    <span class="status-value">10 files</span>
-                </div>
-                <div class="status-item">
-                    <i class="fas fa-file"></i>
-                    <span>File Size Limit:</span>
-                    <span class="status-value">100MB</span>
-                </div>
-                <div class="status-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Security:</span>
-                    <span class="status-value">Client-Side Processing</span>
-                </div>
-            </div>
-        </header>
-        
-        <div class="tabs">
-            <button class="tab active" onclick="switchTab('single')">
-                <i class="fas fa-file-audio"></i> Single File
-            </button>
-            <button class="tab" onclick="switchTab('batch')">
-                <i class="fas fa-folder-open"></i> Batch Convert
-            </button>
-            <button class="tab" onclick="switchTab('trim')">
-                <i class="fas fa-cut"></i> Trim Audio
-            </button>
+    <div class="main-content-wrapper">
+        <section id="instructions">
+            <h2>How to Use This App</h2>
+            <p>1. Upload your audio file by clicking the "Choose File" button.</p>
+            <p>2. Select the format you want to convert to.</p>
+            <p>3. Click the "Convert" button to start the process.</p>
+            <p>4. Download your converted audio file once it's ready.</p>
+        </section>
+
+        <div class="ad-space left-ad">
+            image space  (top)
+            <br>
+            250x250 or 300x250
         </div>
 
-        <div class="error" id="error"></div>
-
-        <!-- Single File Tab -->
-        <div class="tab-content active" id="singleTab">
-            <div class="upload-area" id="singleUploadArea">
-                <span class="upload-icon"><i class="fas fa-music"></i></span>
-                <div class="upload-text">
-                    Drop your audio file here
-                </div>
-                <div class="upload-subtext">
-                    Supports MP3, WAV, FLAC, OGG, M4A, AAC | Max file size: 100MB
-                </div>
-                <input type="file" id="singleFileInput" class="file-input" accept="audio/*">
-            </div>
-
-            <div class="single-file-info" id="singleFileInfo">
-                <h3 class="info-header"><i class="fas fa-info-circle"></i> File Information</h3>
-                <div class="info-row">
-                    <span class="info-label"><i class="fas fa-file"></i> File Name:</span>
-                    <span class="info-value" id="singleFileName"></span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label"><i class="fas fa-weight-hanging"></i> File Size:</span>
-                    <span class="info-value" id="singleFileSize"></span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label"><i class="fas fa-clock"></i> Duration:</span>
-                    <span class="info-value" id="singleFileDuration"></span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label"><i class="fas fa-code"></i> Format:</span>
-                    <span class="info-value" id="singleFileFormat"></span>
-                </div>
-                <audio controls class="audio-player" id="singleOriginalAudio"></audio>
-            </div>
+        <div class="ad-space left-ad">
+            image space  (top)
+            <br>
+            250x250 or 300x250
         </div>
 
-        <!-- Batch Convert Tab -->
-        <div class="tab-content" id="batchTab">
-            <div class="upload-area" id="batchUploadArea">
-                <span class="upload-icon"><i class="fas fa-folder"></i></span>
-                <div class="upload-text">
-                    Drop multiple audio files here
-                </div>
-                <div class="upload-subtext">
-                    Max 10 files per batch | Max file size: 100MB each
-                </div>
-                <input type="file" id="batchFileInput" class="file-input" accept="audio/*" multiple>
-            </div>
-
-            <div class="batch-files" id="batchFiles">
-                <h3 class="info-header"><i class="fas fa-list"></i> Files to Convert</h3>
-                <div class="file-list" id="fileList"></div>
-            </div>
+        <div class="ad-space left-ad">
+            image space  (top)
+            <br>
+            250x250 or 300x250
         </div>
 
-        <!-- Trim Audio Tab -->
-        <div class="tab-content" id="trimTab">
-            <div class="upload-area" id="trimUploadArea">
-                <span class="upload-icon"><i class="fas fa-cut"></i></span>
-                <div class="upload-text">
-                    Drop audio file to trim
+        <div class="container">
+            <header>
+                <div class="logo">
+                    <i class="fas fa-wave-square"></i>
                 </div>
-                <div class="upload-subtext">
-                    Supports all audio formats | Max file size: 100MB
-                </div>
-                <input type="file" id="trimFileInput" class="file-input" accept="audio/*">
-            </div>
-
-            <div class="audio-trimmer" id="audioTrimmer">
-                <h3 class="info-header"><i class="fas fa-scissors"></i> Audio Trimmer</h3>
-                <audio controls class="audio-player" id="trimAudioPlayer"></audio>
+                <h1>Audio Converter Pro</h1>
+                <p class="subtitle">Professional audio conversion and processing with enterprise-grade features</p>
                 
-                <div class="waveform-container" id="waveformContainer">
-                    <div class="waveform" id="waveform"></div>
-                    <div class="trim-handles">
-                        <div class="trim-region" id="trimRegion"></div>
-                        <div class="trim-handle trim-start" id="trimStart"></div>
-                        <div class="trim-handle trim-end" id="trimEnd"></div>
+                <div class="status-bar">
+                    <div class="status-item">
+                        <i class="fas fa-database"></i>
+                        <span>Batch Limit:</span>
+                        <span class="status-value">10 files</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-file"></i>
+                        <span>File Size Limit:</span>
+                        <span class="status-value">100MB</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Security:</span>
+                        <span class="status-value">Client-Side Processing</span>
                     </div>
                 </div>
+            </header>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('single')">
+                    <i class="fas fa-file-audio"></i> Single File
+                </button>
+                <button class="tab" onclick="switchTab('batch')">
+                    <i class="fas fa-folder-open"></i> Batch Convert
+                </button>
+                <button class="tab" onclick="switchTab('trim')">
+                    <i class="fas fa-cut"></i> Trim Audio
+                </button>
+            </div>
 
-                <div class="time-inputs">
+            <div class="error" id="error"></div>
+
+            <div class="tab-content active" id="singleTab">
+                <div class="upload-area" id="singleUploadArea">
+                    <span class="upload-icon"><i class="fas fa-music"></i></span>
+                    <div class="upload-text">
+                        Drop your audio file here
+                    </div>
+                    <div class="upload-subtext">
+                        Supports MP3, WAV, FLAC, OGG, M4A, AAC | Max file size: 100MB
+                    </div>
+                    <input type="file" id="singleFileInput" class="file-input" accept="audio/*">
+                </div>
+
+                <div class="single-file-info" id="singleFileInfo">
+                    <h3 class="info-header"><i class="fas fa-info-circle"></i> File Information</h3>
+                    <div class="info-row">
+                        <span class="info-label"><i class="fas fa-file"></i> File Name:</span>
+                        <span class="info-value" id="singleFileName"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label"><i class="fas fa-weight-hanging"></i> File Size:</span>
+                        <span class="info-value" id="singleFileSize"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label"><i class="fas fa-clock"></i> Duration:</span>
+                        <span class="info-value" id="singleFileDuration"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label"><i class="fas fa-code"></i> Format:</span>
+                        <span class="info-value" id="singleFileFormat"></span>
+                    </div>
+                    <audio controls class="audio-player" id="singleOriginalAudio"></audio>
+                </div>
+            </div>
+
+            <div class="tab-content" id="batchTab">
+                <div class="upload-area" id="batchUploadArea">
+                    <span class="upload-icon"><i class="fas fa-folder"></i></span>
+                    <div class="upload-text">
+                        Drop multiple audio files here
+                    </div>
+                    <div class="upload-subtext">
+                        Max 10 files per batch | Max file size: 100MB each
+                    </div>
+                    <input type="file" id="batchFileInput" class="file-input" accept="audio/*" multiple>
+                </div>
+
+                <div class="batch-files" id="batchFiles">
+                    <h3 class="info-header"><i class="fas fa-list"></i> Files to Convert</h3>
+                    <div class="file-list" id="fileList"></div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="trimTab">
+                <div class="upload-area" id="trimUploadArea">
+                    <span class="upload-icon"><i class="fas fa-cut"></i></span>
+                    <div class="upload-text">
+                        Drop audio file to trim
+                    </div>
+                    <div class="upload-subtext">
+                        Supports all audio formats | Max file size: 100MB
+                    </div>
+                    <input type="file" id="trimFileInput" class="file-input" accept="audio/*">
+                </div>
+
+                <div class="audio-trimmer" id="audioTrimmer">
+                    <h3 class="info-header"><i class="fas fa-scissors"></i> Audio Trimmer</h3>
+                    <audio controls class="audio-player" id="trimAudioPlayer"></audio>
+                    
+                    <div class="waveform-container" id="waveformContainer">
+                        <div class="waveform" id="waveform"></div>
+                        <div class="trim-handles">
+                            <div class="trim-region" id="trimRegion"></div>
+                            <div class="trim-handle trim-start" id="trimStart"></div>
+                            <div class="trim-handle trim-end" id="trimEnd"></div>
+                        </div>
+                    </div>
+
+                    <div class="time-inputs">
+                        <div class="control-group">
+                            <div class="control-header">
+                                <i class="fas fa-hourglass-start"></i> Start Time
+                            </div>
+                            <input type="number" id="startTime" min="0" step="0.1" value="0">
+                        </div>
+                        <div class="control-group">
+                            <div class="control-header">
+                                <i class="fas fa-hourglass-end"></i> End Time
+                            </div>
+                            <input type="number" id="endTime" min="0" step="0.1" value="30">
+                        </div>
+                    </div>
+
+                    <button class="convert-btn" id="previewTrimBtn" style="background: linear-gradient(135deg, var(--info), #138496);">
+                        <i class="fas fa-play-circle"></i> Preview Trimmed Audio
+                    </button>
+                </div>
+            </div>
+
+            <div class="controls" id="controls">
+                <div class="controls-grid">
                     <div class="control-group">
                         <div class="control-header">
-                            <i class="fas fa-hourglass-start"></i> Start Time
+                            <i class="fas fa-file-export"></i> Output Format
                         </div>
-                        <input type="number" id="startTime" min="0" step="0.1" value="0">
+                        <select id="outputFormat">
+                            <option value="mp3">MP3 (Most Compatible)</option>
+                            <option value="wav">WAV (Uncompressed)</option>
+                            <option value="ogg">OGG (Open Source)</option>
+                            <option value="flac">FLAC (Lossless)</option>
+                        </select>
                     </div>
+
                     <div class="control-group">
                         <div class="control-header">
-                            <i class="fas fa-hourglass-end"></i> End Time
+                            <i class="fas fa-sliders-h"></i> Quality
                         </div>
-                        <input type="number" id="endTime" min="0" step="0.1" value="30">
+                        <div style="display: flex; align-items: center;">
+                            <input type="range" id="quality" min="64" max="320" value="192" step="32">
+                            <span class="quality-value" id="qualityValue">192 kbps</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="control-header">
+                            <i class="fas fa-waveform"></i> Sample Rate
+                        </div>
+                        <select id="sampleRate">
+                            <option value="22050">22.05 kHz</option>
+                            <option value="44100" selected>44.1 kHz (CD Quality)</option>
+                            <option value="48000">48 kHz (Professional)</option>
+                            <option value="96000">96 kHz (High-Res)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="control-header">
+                            <i class="fas fa-volume-up"></i> Volume
+                        </div>
+                        <select id="volume">
+                            <option value="0.5">50% (Quieter)</option>
+                            <option value="0.75">75%</option>
+                            <option value="1" selected>100% (Original)</option>
+                            <option value="1.25">125%</option>
+                            <option value="1.5">150% (Louder)</option>
+                            <option value="2.0">200% (Maximum)</option>
+                        </select>
                     </div>
                 </div>
+            </div>
 
-                <button class="convert-btn" id="previewTrimBtn" style="background: linear-gradient(135deg, var(--info), #138496);">
-                    <i class="fas fa-play-circle"></i> Preview Trimmed Audio
-                </button>
+            <button class="convert-btn" id="convertBtn" disabled>
+                <i class="fas fa-sync-alt"></i> Convert Audio
+            </button>
+
+            <div class="progress" id="progress"></div>
+
+            <div class="download-area" id="downloadArea">
+                <h3 class="download-header"><i class="fas fa-check-circle"></i> Conversion Complete!</h3>
+                <div class="download-list" id="downloadList"></div>
+                <div class="download-actions">
+                    <button class="download-all-btn" id="downloadAllBtn">
+                        <i class="fas fa-download"></i> Download All
+                    </button>
+                    <button class="download-all-btn btn-convert-more" onclick="location.reload()">
+                        <i class="fas fa-redo"></i> Convert More
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p>Audio Converter Pro v2.0 &copy; 2023 | Production Ready | Client-Side Processing</p>
             </div>
         </div>
 
-        <!-- Common Controls -->
-        <div class="controls" id="controls">
-            <div class="controls-grid">
-                <div class="control-group">
-                    <div class="control-header">
-                        <i class="fas fa-file-export"></i> Output Format
-                    </div>
-                    <select id="outputFormat">
-                        <option value="mp3">MP3 (Most Compatible)</option>
-                        <option value="wav">WAV (Uncompressed)</option>
-                        <option value="ogg">OGG (Open Source)</option>
-                        <option value="flac">FLAC (Lossless)</option>
-                    </select>
-                </div>
-
-                <div class="control-group">
-                    <div class="control-header">
-                        <i class="fas fa-sliders-h"></i> Quality
-                    </div>
-                    <div style="display: flex; align-items: center;">
-                        <input type="range" id="quality" min="64" max="320" value="192" step="32">
-                        <span class="quality-value" id="qualityValue">192 kbps</span>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <div class="control-header">
-                        <i class="fas fa-waveform"></i> Sample Rate
-                    </div>
-                    <select id="sampleRate">
-                        <option value="22050">22.05 kHz</option>
-                        <option value="44100" selected>44.1 kHz (CD Quality)</option>
-                        <option value="48000">48 kHz (Professional)</option>
-                        <option value="96000">96 kHz (High-Res)</option>
-                    </select>
-                </div>
-
-                <div class="control-group">
-                    <div class="control-header">
-                        <i class="fas fa-volume-up"></i> Volume
-                    </div>
-                    <select id="volume">
-                        <option value="0.5">50% (Quieter)</option>
-                        <option value="0.75">75%</option>
-                        <option value="1" selected>100% (Original)</option>
-                        <option value="1.25">125%</option>
-                        <option value="1.5">150% (Louder)</option>
-                        <option value="2.0">200% (Maximum)</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <button class="convert-btn" id="convertBtn" disabled>
-            <i class="fas fa-sync-alt"></i> Convert Audio
-        </button>
-
-        <div class="progress" id="progress"></div>
-
-        <div class="download-area" id="downloadArea">
-            <h3 class="download-header"><i class="fas fa-check-circle"></i> Conversion Complete!</h3>
-            <div class="download-list" id="downloadList"></div>
-            <div class="download-actions">
-                <button class="download-all-btn" id="downloadAllBtn">
-                    <i class="fas fa-download"></i> Download All
-                </button>
-                <button class="download-all-btn btn-convert-more" onclick="location.reload()">
-                    <i class="fas fa-redo"></i> Convert More
-                </button>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>Audio Converter Pro v2.0 &copy; 2023 | Production Ready | Client-Side Processing</p>
+        <div class="ad-space right-ad">
+            image space (Right)
+            <br>
+            250x250 or 300x250
         </div>
     </div>
 
@@ -1627,5 +1805,26 @@
             document.getElementById('error').classList.remove('show');
         }
     </script>
+    <div class="ad-space left-ad">
+            image space (Left)
+            <br>
+            250x250 or 300x250
+        </div>
+        <div class="ad-space left-ad">
+            image space (Left)
+            <br>
+            250x250 or 300x250
+        </div>
+        <div class="ad-space left-ad">
+            image space (Left)
+            <br>
+            250x250 or 300x250
+        </div>
+        <div class="ad-space left-ad">
+            image space (Left)
+            <br>
+            250x250 or 300x250
+        </div>
+        
 </body>
 </html>
