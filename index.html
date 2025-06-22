@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LXF0JVD1CD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LXF0JVD1CD');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audio Converter Pro | Production Ready</title>
@@ -30,22 +39,21 @@
             min-height: 100vh;
             padding: 20px;
             color: #333;
-            /* Changed to flex for overall page layout */
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Align items to the top */
-            flex-wrap: wrap; /* Allow wrapping for smaller screens */
-            gap: 20px; /* Space between main elements */
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        /* New container for main application content to work with overall layout */
         .main-content-wrapper {
             display: flex;
-            flex-wrap: wrap; /* Allow wrapping for smaller screens */
-            width: 100%; /* Take full width of body */
-            max-width: 1600px; /* Adjust as needed for total layout width */
-            justify-content: center; /* Center content when there's space */
-            gap: 20px; /* Space between app and ads/instructions */
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1600px;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
         }
 
         .container {
@@ -55,8 +63,8 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
             padding: 40px;
             width: 100%;
-            max-width: 900px; /* Adjusted for better integration with ads/instructions */
-            margin: 0; /* Remove auto margin as parent handles centering */
+            max-width: 900px;
+            margin: 0;
             transition: all 0.3s ease;
             order: 2; /* Main content in the middle */
         }
@@ -102,6 +110,8 @@
             margin-bottom: 25px;
             font-size: 0.95rem;
             border: 1px solid #e0e7ff;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .status-item {
@@ -798,224 +808,195 @@
             color: #666;
             font-size: 0.95rem;
         }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: text-decoration 0.3s ease;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+            color: var(--secondary);
+        }
 
-        /* Waveform animation */
         @keyframes wave {
             0% { height: 20%; }
             50% { height: 80%; }
             100% { height: 20%; }
         }
 
-        /* Responsive design */
         @media (max-width: 768px) {
             .container {
                 padding: 25px;
                 margin: 10px;
             }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .upload-area {
-                padding: 40px 15px;
-            }
-            
-            .tabs {
-                flex-direction: column;
-            }
-            
-            .controls-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .time-inputs {
-                grid-template-columns: 1fr;
-            }
-            
+            h1 { font-size: 2.2rem; }
+            .upload-area { padding: 40px 15px; }
+            .tabs { flex-direction: column; }
+            .controls-grid { grid-template-columns: 1fr; }
+            .time-inputs { grid-template-columns: 1fr; }
             .file-item, .download-item {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 15px;
             }
-            
             .file-actions, .download-btn {
                 width: 100%;
                 justify-content: center;
             }
-            
             .download-actions {
                 flex-direction: column;
                 gap: 10px;
             }
-            
             .download-all-btn, .btn-convert-more {
                 width: 100%;
                 justify-content: center;
             }
-
-            /* Adjust instructions and ads for small screens */
-            #instructions, .ad-space {
-                width: 100%;
-                max-width: none;
-                margin: 0 0 20px 0; /* Add bottom margin for separation */
-            }
-
             .main-content-wrapper {
                 flex-direction: column;
                 align-items: center;
             }
-
-            #instructions {
-                order: 1; /* Instructions first on small screens */
-            }
-
-            .ad-space.left-ad, .ad-space.right-ad {
-                order: 3; /* Ads below the main content */
-            }
         }
     </style>
     <style>
-    /* New styles for positioning instructions and ads */
-    #instructions {
-        background-color: #f0f8ff;  /* light blue background */
-        padding: 20px;
-        border-radius: 8px;
-        font-family: Arial, sans-serif;
-        color: #333;               /* dark text */
-        max-width: 300px; /* Reduced width to fit top-left */
-        margin: 0; /* Remove auto margin */
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        order: 1; /* Place it first in the flex container */
-        align-self: flex-start; /* Align to the start (top-left) */
-    }
-
-    #instructions h2 {
-        color: #0056b3;           /* darker blue for the header */
-        margin-bottom: 15px;
-    }
-
-    #instructions p {
-        font-size: 16px;
-        line-height: 1.5;
-    }
-
-    /* Styles for the ad spaces */
-    .ad-space {
-        background-color: #e6ffe6; /* Light green background for ads */
-        border: 2px dashed #28a745; /* Green dashed border */
-        padding: 20px;
-        border-radius: 8px;
-        text-align: center;
-        font-family: Arial, sans-serif;
-        color: #333;
-        max-width: 300px; /* Width for ads */
-        min-height: 250px; /* Minimum height for ads */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .left-ad {
-        order: 1; /* Left ad also on the left */
-        align-self: flex-start;
-    }
-
-    .right-ad {
-        order: 3; /* Right ad on the right */
-        align-self: flex-start;
-    }
-
-    /* Media query to ensure instructions and ads stack on smaller screens */
-    @media (max-width: 1200px) { /* Adjust breakpoint as needed */
-        .main-content-wrapper {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #instructions {
-            order: 1;
+        /* NEW: Styles for the improved instructions section */
+        .instructions-container {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            padding: 30px;
             width: 100%;
-            max-width: 600px; /* Allow wider on smaller screens if it's the only left element */
+            max-width: 350px;
+            margin: 0;
+            order: 1; /* Puts it on the left */
+            align-self: flex-start;
+            transition: all 0.3s ease;
         }
 
-        .ad-space.left-ad {
-            order: 3;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .ad-space.right-ad {
-            order: 4;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .container {
-            order: 2; /* Main content in the middle */
-        }
-    }
-
-    @media (min-width: 1201px) {
-        body {
-            align-items: flex-start; /* Ensure elements start from the top */
-        }
-        .main-content-wrapper {
+        .instructions-container summary {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
             display: flex;
-            flex-direction: row; /* Horizontal layout for larger screens */
-            justify-content: center; /* Center main elements */
-            align-items: flex-start; /* Align all items to the top */
+            align-items: center;
+            gap: 12px;
+            outline: none;
+            list-style: none; /* Hide default marker */
         }
-        #instructions {
-            margin-right: 20px; /* Space between instructions and main content */
-            order: 1;
+        .instructions-container summary::-webkit-details-marker {
+            display: none; /* Hide default marker in Chrome/Safari */
         }
-        .ad-space.left-ad {
-            margin-right: 20px;
-            order: 1; /* Can be next to instructions or above if you want specific stacking */
+
+        .instructions-content {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e7ff;
+            color: #444;
         }
-        .ad-space.right-ad {
-            margin-left: 20px; /* Space between main content and right ad */
-            order: 3;
+
+        .instructions-content h4 {
+            color: var(--primary);
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
         }
-        .container {
-            order: 2; /* Main content remains in the middle */
-            flex-shrink: 0; /* Prevent it from shrinking */
+
+        .instructions-content p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
         }
-    }
+
+        .instructions-content ul {
+            list-style: none;
+            padding-left: 5px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .instructions-content .fa-ul {
+            margin-left: 1.5em;
+        }
+
+        .instructions-content .fa-li .fas {
+            color: var(--secondary);
+        }
+
+        /* Styles for the ad space */
+        .ad-space {
+            background-color: #e6ffe6;
+            border: 2px dashed #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #333;
+            width: 100%;
+            max-width: 300px;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            order: 3; /* Puts it on the right */
+            align-self: flex-start;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 1320px) { /* Breakpoint to stack instructions, app, and ad */
+            .main-content-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+            .instructions-container, .container, .ad-space {
+                order: unset; /* Reset order to follow document flow */
+                max-width: 900px;
+            }
+        }
     </style>
 
 </head>
 <body>
     <div class="main-content-wrapper">
-        <section id="instructions">
-            <h2>How to Use This App</h2>
-            <p>1. Upload your audio file by clicking the "Choose File" button.</p>
-            <p>2. Select the format you want to convert to.</p>
-            <p>3. Click the "Convert" button to start the process.</p>
-            <p>4. Download your converted audio file once it's ready.</p>
-        </section>
+        <div class="instructions-container">
+            <details open> <summary>
+                    <i class="fas fa-info-circle"></i> How to Use This Tool
+                </summary>
+                <div class="instructions-content">
+                    <p>This tool offers three main functions. Here’s how to get started:</p>
+                    
+                    <h4>Step 1: Choose Your Mode</h4>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"><i class="fas fa-file-audio"></i></span><strong>Single File:</strong> For converting one audio file.</li>
+                        <li><span class="fa-li"><i class="fas fa-folder-open"></i></span><strong>Batch Convert:</strong> For converting multiple files (up to 10) with the same settings.</li>
+                        <li><span class="fa-li"><i class="fas fa-cut"></i></span><strong>Trim Audio:</strong> To cut a section from a file before converting.</li>
+                    </ul>
 
-        <div class="ad-space left-ad">
-            image space  (top)
-            <br>
-            250x250 or 300x250
-        </div>
+                    <h4>Step 2: Upload Your Audio</h4>
+                    <p>In your chosen tab, click the upload area or drag and drop your file(s) into the box. Supported formats include MP3, WAV, FLAC, and more.</p>
 
-        <div class="ad-space left-ad">
-            image space  (top)
-            <br>
-            250x250 or 300x250
-        </div>
+                    <h4>Step 3: Adjust Settings</h4>
+                    <p>Once a file is uploaded, a controls panel appears where you can optionally adjust:</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"><i class="fas fa-file-export"></i></span><strong>Output Format:</strong> Select MP3, WAV, etc.</li>
+                        <li><span class="fa-li"><i class="fas fa-sliders-h"></i></span><strong>Quality:</strong> Adjust the bitrate for your file.</li>
+                        <li><span class="fa-li"><i class="fas fa-waveform"></i></span><strong>Sample Rate & Volume.</strong></li>
+                    </ul>
 
-        <div class="ad-space left-ad">
-            image space  (top)
-            <br>
-            250x250 or 300x250
+                    <h4>Step 4: Convert & Download</h4>
+                    <p>Click the <strong>Convert</strong> button. After processing, your new files will appear in a download area. You can download them individually or all at once.</p>
+                </div>
+            </details>
         </div>
 
         <div class="container">
@@ -1229,14 +1210,19 @@
             </div>
             
             <div class="footer">
-                <p>Audio Converter Pro v2.0 &copy; 2023 | Production Ready | Client-Side Processing</p>
+                <p>Audio Converter Pro v2.0 &copy; 2025 | Production Ready | Client-Side Processing</p>
+                <p>
+                    <a href="privacy.html">Privacy Policy</a> | 
+                    <a href="terms.html">Terms of Use</a> | 
+                    <a href="contact.html">Contact</a>
+                </p>
             </div>
         </div>
 
         <div class="ad-space right-ad">
-            image space (Right)
+            Ad Space (Right)
             <br>
-            250x250 or 300x250
+            300x250
         </div>
     </div>
 
@@ -1805,26 +1791,5 @@
             document.getElementById('error').classList.remove('show');
         }
     </script>
-    <div class="ad-space left-ad">
-            image space (Left)
-            <br>
-            250x250 or 300x250
-        </div>
-        <div class="ad-space left-ad">
-            image space (Left)
-            <br>
-            250x250 or 300x250
-        </div>
-        <div class="ad-space left-ad">
-            image space (Left)
-            <br>
-            250x250 or 300x250
-        </div>
-        <div class="ad-space left-ad">
-            image space (Left)
-            <br>
-            250x250 or 300x250
-        </div>
-        
 </body>
 </html>
